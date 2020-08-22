@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,17 +12,19 @@ function App() {
     </div>
   );
 }
-const products = ['iPhone 11','MacBook Pro', 'iPad', 'Apple Magic Mouse']
+const products = ['iPhone 11','MacBook Pro', 'iPad', 'Apple Magic Mouse', 'Apple Pencil'];
 
 function Product(props){
+  const [addCart, setCart] = useState(0)
+  const handleIncrease = () => setCart(addCart + 1)
   return(
     <div>
-    <h1>Product List :</h1>
+    <h1>Product List - Cart {addCart} <button onClick={() => setCart(addCart - 1)} >Remove</button></h1>
     <ul>
-    <li>{props.product}</li>
-    </ul>
-    <h2>Cart</h2>
-    <button>Add to cart</button>
+      {
+      products.map(product => <li>{product} - <button onClick={handleIncrease}>Add to cart</button></li>)
+      }
+      </ul>
     </div>
   )
 }
